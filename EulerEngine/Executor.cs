@@ -31,9 +31,10 @@ namespace EulerEngine
 
         #endregion
 
-        public void RegisterSolver(ISolver solver)
+        public Executor RegisterSolver(ISolver solver)
         {
             solvers.Add(solver);
+            return this;
         }
 
         public IEnumerable<RunResults> RunSolvers()

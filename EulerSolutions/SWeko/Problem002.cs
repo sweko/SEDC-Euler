@@ -16,7 +16,10 @@ namespace EulerSolutions.SWeko
 
         public long Execute()
         {
-            var result = GetFibonacciSequence().TakeWhile(f => f < 4000000).Where(f => f % 2 == 0).Sum();
+            var result = GetFibonacciSequence()
+                .Where(f => f % 2 == 0)
+                .TakeWhile(f => f < 4000000)
+                .Sum();
             return result;
         }
 

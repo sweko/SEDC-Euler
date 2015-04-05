@@ -1,0 +1,19 @@
+﻿@model IEnumerable<EulerEngine.RunResults>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Solved</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var runResult in Model)
+        {
+            <tr>
+                <td>@runResult.Name</td>
+                <td>@runResult.TotalSolved</td>
+            </tr>
+        }
+    </tbody>
+</table>

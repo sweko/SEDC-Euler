@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseSolver.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="IProblemSolution.cs" />
     <Compile Include="ISolver.cs" />
