@@ -10,11 +10,11 @@ namespace EulerSolutions.SWeko
     class PrimeManager
     {
 
-        private static HashSet<long> PrimesHash;
-        private static long LastPrime;
+        //private static HashSet<long> PrimesHash;
+        //private static long LastPrime;
 
         public static List<long> Primes;
-        private static long[] PrimesArray;
+        //private static long[] PrimesArray;
 
         public static void GeneratePrimes(int limit)
         {
@@ -58,9 +58,9 @@ namespace EulerSolutions.SWeko
                 {
                     Primes.Add(n);
                 }
-            LastPrime = Primes[Primes.Count - 1];
-            PrimesArray = Primes.ToArray();
-            PrimesHash = new HashSet<long>(Primes);
+            //LastPrime = Primes[Primes.Count - 1];
+            //PrimesArray = Primes.ToArray();
+            //PrimesHash = new HashSet<long>(Primes);
         }
 
     }

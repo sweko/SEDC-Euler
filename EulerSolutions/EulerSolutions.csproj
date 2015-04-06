@@ -54,6 +54,7 @@
     <Compile Include="SWeko\Problem008.cs" />
     <Compile Include="SWeko\Problem009.cs" />
     <Compile Include="SWeko\Problem010.cs" />
+    <Compile Include="SWeko\Problem012.cs" />
     <Compile Include="SWeko\SWekoSolver.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -28,6 +28,7 @@ namespace EulerSolutions.SWeko
                 new Problem008(),
                 new Problem009(),
                 new Problem010(),
+                new Problem012(),
             };
 
             return mySolutions;
