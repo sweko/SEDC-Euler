@@ -39,6 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DKotoski\DKotoskiSolver.cs" />
+    <Compile Include="DKotoski\Problem1.cs" />
+    <Compile Include="DKotoski\Problem10.cs" />
+    <Compile Include="DKotoski\Problem11.cs" />
+    <Compile Include="DKotoski\Problem2.cs" />
+    <Compile Include="DKotoski\Problem3.cs" />
+    <Compile Include="DKotoski\Problem4.cs" />
+    <Compile Include="DKotoski\Problem5.cs" />
+    <Compile Include="DKotoski\Problem6.cs" />
+    <Compile Include="DKotoski\Problem7.cs" />
+    <Compile Include="DKotoski\Problem8.cs" />
+    <Compile Include="DKotoski\Problem9.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SWeko\Problem002.cs" />
     <Compile Include="SWeko\Problem001.cs" />

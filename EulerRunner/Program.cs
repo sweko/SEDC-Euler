@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using EulerEngine;
-using EulerSolutions.SWeko;
+using EulerSolutions.DKotoski;
 
 namespace EulerRunner
 {
@@ -15,7 +15,7 @@ namespace EulerRunner
         {
             Executor executor = new Executor();
             var solvers = Assembly
-                .GetAssembly(typeof(SWekoSolver))
+                .GetAssembly(typeof(DKotoskiSolver))
                 .GetTypes()
                 .Where(t => t.GetInterfaces().Contains(typeof(ISolver)))
                 .Select(Activator.CreateInstance)
@@ -32,6 +32,7 @@ namespace EulerRunner
             {
                 Console.WriteLine("{0}: solved {1}/50", runResult.Name, runResult.TotalSolved);
             }
+            Console.ReadLine();
         }
     }
 }

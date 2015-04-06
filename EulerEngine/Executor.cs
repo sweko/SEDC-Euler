@@ -49,7 +49,7 @@ namespace EulerEngine
             {
                 try
                 {
-                    var solverResult = solution.Execute();
+                    var solverResult = solution.Execute();                   
                     var actualResult = solutions[solution.ProblemID];
                     result.ProblemResults.Add(solution.ProblemID, actualResult == solverResult);
                 }
