@@ -19,7 +19,15 @@ namespace EulerSolutions.SWeko
             List<IProblemSolution> mySolutions = new List<IProblemSolution>
             {
                 new Problem001(), 
-                new Problem002()
+                new Problem002(),
+                new Problem003(),
+                new Problem004(),
+                new Problem005(),
+                new Problem006(),
+                new Problem007(),
+                new Problem008(),
+                new Problem009(),
+                new Problem010(),
             };
 
             return mySolutions;
