@@ -16,6 +16,7 @@ namespace EulerSolutions.SWeko
 
         public long Execute()
         {
+            PrimeManager.GeneratePrimes(1000000);
             var result = GetTriangeNumbers()
                 .SkipWhile(tn => tn.GetDivisors().Count() < 500)
                 .First();
