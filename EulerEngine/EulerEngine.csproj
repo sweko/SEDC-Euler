@@ -43,6 +43,7 @@
     <Compile Include="Executor.cs" />
     <Compile Include="IProblemSolution.cs" />
     <Compile Include="ISolver.cs" />
+    <Compile Include="ProblemRunResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunResults.cs" />
   </ItemGroup>

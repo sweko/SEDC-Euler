@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using EulerEngine;
-using EulerSolutions.DKotoski;
+using EulerSolutions.SWeko;
 
 namespace EulerRunner
 {
@@ -15,7 +15,7 @@ namespace EulerRunner
         {
             Executor executor = new Executor();
             var solvers = Assembly
-                .GetAssembly(typeof(DKotoskiSolver))
+                .GetAssembly(typeof(SWekoSolver))
                 .GetTypes()
                 .Where(t => t.GetInterfaces().Contains(typeof(ISolver)))
                 .Select(Activator.CreateInstance)
@@ -26,13 +26,28 @@ namespace EulerRunner
                 executor.RegisterSolver(solver);
             }
 
-            var runResults = executor.RunSolvers();
+            var runResults = executor.RunSolvers().ToList();
 
             foreach (var runResult in runResults)
             {
-                Console.WriteLine("{0}: solved {1}/50", runResult.Name, runResult.TotalSolved);
+                Console.WriteLine("{0}: solved {1}/50 in {2}ms", runResult.Name, runResult.TotalSolved, runResult.TotalElapsed);
+                foreach (var pr in runResult.ProblemResults)
+                {
+                    Console.WriteLine("{0} ({2}): {1}", pr.Key, pr.Value.RunLength, pr.Value.Success);
+                }
             }
-            Console.ReadLine();
+
+            var resultsByProblem = runResults
+                .SelectMany(rr => rr.ProblemResults.Values.Select(prr => new {prr.ProblemID, prr.RunLength, rr.Name}))
+                .GroupBy(prr => prr.ProblemID)
+                .Select(group => group.OrderBy(prr => prr.RunLength).First());
+
+            foreach (var topResult in resultsByProblem)
+            {
+                Console.WriteLine("Problem {0}: {1}ms by {2}", topResult.ProblemID, topResult.RunLength.TotalMilliseconds, topResult.Name);
+            }
+
+
         }
     }
 }

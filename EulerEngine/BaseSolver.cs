@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EulerEngine
 {
-    class BaseSolver : ISolver
+    public class BaseSolver : ISolver
     {
         public string Name { get; set; }
 

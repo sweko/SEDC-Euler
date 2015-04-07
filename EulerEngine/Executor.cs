@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,9 +50,15 @@ namespace EulerEngine
             {
                 try
                 {
-                    var solverResult = solution.Execute();                   
+                    Stopwatch stopwatch = Stopwatch.StartNew();
+                    var solverResult = solution.Execute();           
+                    stopwatch.Stop();
                     var actualResult = solutions[solution.ProblemID];
-                    result.ProblemResults.Add(solution.ProblemID, actualResult == solverResult);
+                    result.ProblemResults.Add(solution.ProblemID, new ProblemRunResult{
+                        ProblemID = solution.ProblemID,
+                        Success = actualResult == solverResult,
+                        RunLength = stopwatch.Elapsed
+                    });
                 }
                 catch (Exception ex)
                 {

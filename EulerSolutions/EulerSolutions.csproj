@@ -52,8 +52,21 @@
     <Compile Include="DKotoski\Problem8.cs" />
     <Compile Include="DKotoski\Problem9.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SWeko\Extensions.cs" />
+    <Compile Include="SWeko\Factor.cs" />
+    <Compile Include="SWeko\FactorCollection.cs" />
+    <Compile Include="SWeko\PrimeManager.cs" />
     <Compile Include="SWeko\Problem002.cs" />
     <Compile Include="SWeko\Problem001.cs" />
+    <Compile Include="SWeko\Problem003.cs" />
+    <Compile Include="SWeko\Problem004.cs" />
+    <Compile Include="SWeko\Problem005.cs" />
+    <Compile Include="SWeko\Problem006.cs" />
+    <Compile Include="SWeko\Problem007.cs" />
+    <Compile Include="SWeko\Problem008.cs" />
+    <Compile Include="SWeko\Problem009.cs" />
+    <Compile Include="SWeko\Problem010.cs" />
+    <Compile Include="SWeko\Problem012.cs" />
     <Compile Include="SWeko\SWekoSolver.cs" />
   </ItemGroup>
   <ItemGroup>

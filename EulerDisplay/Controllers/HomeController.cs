@@ -26,9 +26,27 @@ namespace EulerDisplay.Controllers
                 executor.RegisterSolver(solver);
             }
 
-            var runResults = executor.RunSolvers();
+            executor.RegisterSolver(new BaseSolver { Name = "Darko Ivanov" });
+            executor.RegisterSolver(new BaseSolver { Name = "Darko Kostadinov" });
+            executor.RegisterSolver(new BaseSolver { Name = "Goran Tozievski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Gorast Cvetkovski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Vladimir Totochevski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Jovan Cokleski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Petar Papalevski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Ilche Ivanovski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Kristijan Arsovski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Monika Jovanova" });
+            executor.RegisterSolver(new BaseSolver { Name = "Ervin Jonuzoski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Mitko Miloshev" });
+            executor.RegisterSolver(new BaseSolver { Name = "Martin Josifovski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Ice Jovanoski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Nikola Andreev" });
+            executor.RegisterSolver(new BaseSolver { Name = "Darko Hristovski" });
+            executor.RegisterSolver(new BaseSolver { Name = "Daniel Bibovski" });
+            
+            var runResults = executor.RunSolvers().OrderByDescending(rr => rr.TotalSolved).ThenBy(rr => rr.Name).ToList();
 
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Student Leaderboard";
 
             return View(runResults);
         }

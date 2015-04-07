@@ -1,19 +1,62 @@
 ﻿@model IEnumerable<EulerEngine.RunResults>
-
 <table>
     <thead>
         <tr>
             <th>Name</th>
             <th>Solved</th>
+            <th>Milliseconds</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var runResult in Model)
-        {
-            <tr>
-                <td>@runResult.Name</td>
-                <td>@runResult.TotalSolved</td>
-            </tr>
+        @{
+            var index = 0;
+            foreach (var runResult in Model)
+            {
+                <tr>
+                    <td>@runResult.Name</td>
+                    <td>@runResult.TotalSolved</td>
+                    <td class="detailsLink" data-index="@index">
+                        @runResult.TotalElapsed
+                        <span class="details">
+                            @foreach (var problemResult in runResult.ProblemResults.Values)
+                            {
+                                <br />
+                                <span>Problem @problemResult.ProblemID took @problemResult.RunLength.TotalMilliseconds ms</span>
+                            }
+                        </span>
+                    </td>
+                </tr>
+                index++;
+            }
         }
     </tbody>
 </table>
+
+@{
+    //this part should not be in a view - this is very much controller logic
+    var resultsByProblem = Model
+        .SelectMany(rr => rr.ProblemResults.Values.Select(prr => new {prr.ProblemID, prr.RunLength, rr.Name}))
+        .GroupBy(prr => prr.ProblemID)
+        .Select(group => group.OrderBy(prr => prr.RunLength).First());
+}
+<br/>
+<div>
+    Fastest solvers:
+</div>
+
+@foreach (var topResult in resultsByProblem)
+{
+    <span>@string.Format("Problem {0}: {1}ms by {2}", topResult.ProblemID, topResult.RunLength.TotalMilliseconds, topResult.Name)</span><br/>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".details").hide();
+            $(".detailsLink").click(function () {
+                $(this).find("span.details").toggle();
+            });
+        });
+    </script>
+}
