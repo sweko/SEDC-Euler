@@ -28,7 +28,6 @@ namespace EulerDisplay.Controllers
 
             executor.RegisterSolver(new BaseSolver { Name = "Darko Ivanov" });
             executor.RegisterSolver(new BaseSolver { Name = "Darko Kostadinov" });
-            executor.RegisterSolver(new BaseSolver { Name = "Darko Kotoski" });
             executor.RegisterSolver(new BaseSolver { Name = "Goran Tozievski" });
             executor.RegisterSolver(new BaseSolver { Name = "Gorast Cvetkovski" });
             executor.RegisterSolver(new BaseSolver { Name = "Vladimir Totochevski" });
