@@ -18,12 +18,10 @@ namespace EulerSolutions.SWeko
         {
             var possibleSides = Enumerable.Range(1, 500).ToList();
             var result = possibleSides.SelectMany(a =>
-                possibleSides.SkipWhile(b => b < a).SelectMany(b =>
-                    possibleSides.SkipWhile(c => c < b)
-                        .Where(c => c * c == a * a + b * b)
-                        .Where(c => a + b + c == 1000)
-                        .Select(c => a * b * c)))
-                .Single();
+                possibleSides.SkipWhile(b => b < a)
+                    .Where(b => a * a + b * b == (1000 - a - b) * (1000 - a - b))
+                    .Select(b => a * b * (1000 - a - b)))
+                .First();
             return result;
         }
     }

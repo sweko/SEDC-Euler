@@ -44,9 +44,9 @@ namespace EulerDisplay.Controllers
             executor.RegisterSolver(new BaseSolver { Name = "Darko Hristovski" });
             executor.RegisterSolver(new BaseSolver { Name = "Daniel Bibovski" });
             
-            var runResults = executor.RunSolvers().OrderByDescending(rr => rr.TotalSolved).ThenBy(rr => rr.Name);
+            var runResults = executor.RunSolvers().OrderByDescending(rr => rr.TotalSolved).ThenBy(rr => rr.Name).ToList();
 
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Student Leaderboard";
 
             return View(runResults);
         }

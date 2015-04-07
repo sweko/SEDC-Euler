@@ -16,7 +16,7 @@ namespace EulerSolutions.SWeko
 
         public long Execute()
         {
-            PrimeManager.GeneratePrimes(1000000);
+            PrimeManager.GeneratePrimes(200000);
             return PrimeManager.Primes[10000];
         }
     }

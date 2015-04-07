@@ -61,35 +61,52 @@ namespace EulerSolutions.SWeko
             }
         }
 
+
+        private static readonly Dictionary<long, FactorCollection> FactorCollections = new Dictionary<long, FactorCollection>();
+
         public static FactorCollection Factorize(this long number)
         {
+            long initNumber = number;
+            if (FactorCollections.ContainsKey(initNumber))
+                return FactorCollections[initNumber];
+
             FactorCollection results = new FactorCollection();
             int sqrt = (int)Math.Sqrt(number);
-            foreach (long prime in PrimeManager.Primes.TakeWhile(_ => number != 1))
+            for (int i = 0; i < PrimeManager.Primes.Count; i++)
             {
-                if (prime > sqrt)
+                if (number == 1)
+                    break;
+                if (PrimeManager.Primes[i] > sqrt)
                 {
                     results.Add(new Factor { Prime = number, Cardinality = 1 });
                     number = 1;
                     break;
                 }
-
-                if (number % prime != 0)
-                    continue;
-
-                Factor factor = new Factor { Prime = prime, Cardinality = 1 };
-                number /= prime;
-                while (number % prime == 0)
+                if (number % PrimeManager.Primes[i] == 0)
                 {
-                    factor.Cardinality++;
-                    number /= prime;
+                    results.Add(new Factor { Prime = PrimeManager.Primes[i], Cardinality = 1 });
+                    number /= PrimeManager.Primes[i];
                 }
-                results.Add(factor);
+
+                if (FactorCollections.ContainsKey(number))
+                {
+                    results = results.Append(FactorCollections[number]);
+                    FactorCollections.Add(initNumber, results);
+                    return results;
+                }
+
+                while (number % PrimeManager.Primes[i] == 0)
+                {
+                    results[results.Count - 1].Cardinality++;
+                    number /= PrimeManager.Primes[i];
+                }
+
             }
             if (number != 1)
             {
                 results.Add(new Factor { Prime = number, Cardinality = 1 });
             }
+            FactorCollections.Add(initNumber, results);
             return results;
         }
 
