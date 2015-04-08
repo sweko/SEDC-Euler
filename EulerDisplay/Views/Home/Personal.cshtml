@@ -1,0 +1,14 @@
+﻿@model EulerEngine.RunResults
+
+@{
+    ViewBag.Title = "Personal";
+}
+
+<h2>@Model.Name</h2>
+
+@foreach (var problem in Model.ProblemResults)
+{
+    <p>@string.Format("Problem {0}. {1} ms",problem.Value.ProblemID,problem.Value.RunLength.TotalMilliseconds)</p>
+}
+<p>@string.Format("Total Time: {0} ms", Model.TotalElapsed)</p>
+

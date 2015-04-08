@@ -13,7 +13,7 @@
             foreach (var runResult in Model)
             {
                 <tr>
-                    <td>@runResult.Name</td>
+                    <td>@Html.ActionLink(runResult.Name, "Personal", "Home", new { Solver = runResult.Name },null)</td>
                     <td>@runResult.TotalSolved</td>
                     <td class="detailsLink" data-index="@index">
                         @runResult.TotalElapsed
