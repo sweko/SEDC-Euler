@@ -46,7 +46,7 @@
 
 @foreach (var topResult in resultsByProblem)
 {
-    <span>@string.Format("Problem {0}: {1}ms by {2}", topResult.ProblemID, topResult.RunLength.TotalMilliseconds, topResult.Name)</span><br/>
+    <span>@Html.ActionLink(string.Format("Problem {0}:", topResult.ProblemID), "Solution", "Home", new { id = topResult.ProblemID }, null) @string.Format("{0}ms by {1}",topResult.RunLength.TotalMilliseconds, topResult.Name)</span><br/>
 }
 
 @section scripts
