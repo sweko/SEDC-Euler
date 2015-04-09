@@ -12,6 +12,14 @@ namespace EulerEngine
         private readonly List<ISolver> solvers;
         private readonly Dictionary<int, long> solutions;
 
+        public int NumberOfSolutions
+        {
+            get
+            {
+                return solvers.Where(x => x.GetSolutions().Count() > 0).Sum(x=>x.GetSolutions().Count());
+            }
+        }
+
         #region init
         public Executor()
         {
@@ -69,5 +77,6 @@ namespace EulerEngine
             }
             return result;
         }
+
     }
 }
