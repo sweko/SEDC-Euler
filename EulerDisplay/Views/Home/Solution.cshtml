@@ -1,0 +1,26 @@
+﻿@model System.Collections.Generic.List<EulerEngine.RunResults>
+
+    @{
+        ViewBag.Title = "Solution";
+    }
+
+
+
+    <table class="table" style="max-width:500px; margin:auto;">
+        <thead>
+            <tr>
+                <th rowspan="2">
+                    <h2>@ViewBag.Problem</h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var solution in Model)
+            {
+                <tr>
+                    <td>@solution.Name</td>
+                    <td>@solution.ProblemResults.First().Value.RunLength.TotalMilliseconds ms</td>
+                </tr>
+            }
+        </tbody>    
+    </table>

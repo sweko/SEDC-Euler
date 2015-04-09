@@ -22,9 +22,10 @@ namespace EulerSolutions.DKotoski
 
         public IEnumerable<List<long>> GetTriplets()
         {
-            for (long i = 1; i < 1000; i++)
+
+            for (long i = 1; i < 1000/3; i++)
             {
-                for (long j = 1; j < 1000; j++)
+                for (long j = 1; j < 1000/2; j++)
                 {
                     if(Math.Sqrt(i*i+j*j)==Math.Floor(Math.Sqrt(i*i+j*j)))
                         yield return new List<long>(){i,j,(long)Math.Sqrt(i*i+j*j)};
