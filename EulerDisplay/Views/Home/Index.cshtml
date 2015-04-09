@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<EulerEngine.RunResults>
-<table>
+<table class="table" style="max-width: 500px; float: left;">
     <thead>
         <tr>
             <th>Name</th>
@@ -13,7 +13,7 @@
             foreach (var runResult in Model)
             {
                 <tr>
-                    <td>@runResult.Name</td>
+                    <td>@Html.ActionLink(runResult.Name, "Personal", "Home", new { Solver = runResult.Name }, null)</td>
                     <td>@runResult.TotalSolved</td>
                     <td class="detailsLink" data-index="@index">
                         @runResult.TotalElapsed
@@ -26,7 +26,7 @@
                         </span>
                     </td>
                 </tr>
-                index++;
+                            index++;
             }
         }
     </tbody>
@@ -35,20 +35,38 @@
 @{
     //this part should not be in a view - this is very much controller logic
     var resultsByProblem = Model
-        .SelectMany(rr => rr.ProblemResults.Values.Select(prr => new {prr.ProblemID, prr.RunLength, rr.Name}))
+        .SelectMany(rr => rr.ProblemResults.Values.Select(prr => new { prr.ProblemID, prr.RunLength, rr.Name }))
         .GroupBy(prr => prr.ProblemID)
         .Select(group => group.OrderBy(prr => prr.RunLength).First());
 }
-<br/>
-<div>
-    Fastest solvers:
-</div>
+<br />
 
-@foreach (var topResult in resultsByProblem)
-{
-    <span>@string.Format("Problem {0}: {1}ms by {2}", topResult.ProblemID, topResult.RunLength.TotalMilliseconds, topResult.Name)</span><br/>
-}
-
+<table class="table" style="max-width: 500px; float: right;">
+    <thead>
+        <tr>
+            <th rowspan="3">
+                Fastest solvers:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var topResult in resultsByProblem)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(string.Format("Problem {0}:", topResult.ProblemID), "Solution", "Home", new { id = topResult.ProblemID }, null)
+                </td>
+                <td>
+                    @topResult.RunLength.TotalMilliseconds ms
+                </td>
+                <td>
+                    @topResult.Name
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="clear:both;"></div>
 @section scripts
 {
     <script type="text/javascript">

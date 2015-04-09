@@ -47,7 +47,7 @@ namespace EulerRunner
                 Console.WriteLine("Problem {0}: {1}ms by {2}", topResult.ProblemID, topResult.RunLength.TotalMilliseconds, topResult.Name);
             }
 
-
+            Console.ReadLine();
         }
     }
 }

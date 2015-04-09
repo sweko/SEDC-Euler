@@ -1,0 +1,35 @@
+﻿@model EulerEngine.RunResults
+
+@{
+    ViewBag.Title = "Personal";
+}
+
+<table class="table" style="max-width: 500px; margin: auto;">
+    <thead>
+        <tr>
+            <th rowspan="2">
+                <h2>@Model.Name</h2>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var problem in Model.ProblemResults)
+        {
+            <tr>
+                <td>
+                    @problem.Value.ProblemID
+                </td>
+                <td>
+                    @problem.Value.RunLength.TotalMilliseconds ms
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Total Time: </td>
+            <td>@Model.TotalElapsed ms</td>
+        </tr>
+    </tfoot>
+</table>

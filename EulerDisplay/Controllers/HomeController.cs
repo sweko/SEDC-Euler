@@ -13,42 +13,72 @@ namespace EulerDisplay.Controllers
     {
         public ActionResult Index()
         {
-            Executor executor = new Executor();
-            var solvers = Assembly
-                .GetAssembly(typeof(SWekoSolver))
-                .GetTypes()
-                .Where(t => t.GetInterfaces().Contains(typeof(ISolver)))
-                .Select(Activator.CreateInstance)
-                .Cast<ISolver>();
-
-            foreach (var solver in solvers)
-            {
-                executor.RegisterSolver(solver);
-            }
-
-            executor.RegisterSolver(new BaseSolver { Name = "Darko Ivanov" });
-            executor.RegisterSolver(new BaseSolver { Name = "Darko Kostadinov" });
-            executor.RegisterSolver(new BaseSolver { Name = "Goran Tozievski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Gorast Cvetkovski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Vladimir Totochevski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Jovan Cokleski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Petar Papalevski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Ilche Ivanovski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Kristijan Arsovski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Monika Jovanova" });
-            executor.RegisterSolver(new BaseSolver { Name = "Ervin Jonuzoski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Mitko Miloshev" });
-            executor.RegisterSolver(new BaseSolver { Name = "Martin Josifovski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Ice Jovanoski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Nikola Andreev" });
-            executor.RegisterSolver(new BaseSolver { Name = "Darko Hristovski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Daniel Bibovski" });
-            
-            var runResults = executor.RunSolvers().OrderByDescending(rr => rr.TotalSolved).ThenBy(rr => rr.Name).ToList();
+            var runResults = Results.All;
 
             ViewBag.Title = "Student Leaderboard";
 
             return View(runResults);
         }
+
+        public ActionResult Personal(string Solver)
+        {
+            
+
+            ViewBag.Title = "Student Leaderboard";
+
+            ViewBag.Title = "Student Leaderboard";
+
+            var result = Results.All.FirstOrDefault(s => s.Name == Solver);
+
+
+            if (result == null)
+            {
+                Redirect("~/Error");
+            }
+
+            return View(result);
+        }
+
+        public ActionResult Solution(string id)
+        {
+            var runResults = Results.All;   
+
+            ViewBag.Title = "Student Leaderboard";
+
+            ViewBag.Title = "Student Leaderboard";
+
+            var filteredResults = new List<RunResults>();
+
+
+            //should be done some other way...
+            foreach (var result in runResults)
+            {
+                foreach (var problem in result.ProblemResults)
+                {
+                    if (problem.Value.ProblemID.ToString() == id)
+                    {
+                        filteredResults.Add(result);
+                        break;
+                    }
+                }
+            }
+
+            filteredResults = filteredResults.Where(s => s.TotalSolved != 0).OrderBy(s => s.TotalElapsed).ToList();
+           
+                ViewBag.Problem = "Problem " + id;
+
+            if (filteredResults == null)
+            {
+                Redirect("~/Error");
+            }
+            return View(filteredResults);
+        }
+
+        public ActionResult Reset()
+        {
+            Results.Recalculate();
+            return Redirect("~/Home/Index");
+        }
+
     }
 }
