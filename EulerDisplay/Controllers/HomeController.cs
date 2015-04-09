@@ -28,9 +28,8 @@ namespace EulerDisplay.Controllers
 
             ViewBag.Title = "Student Leaderboard";
 
-            var runResults = Results.All;
+            var result = Results.All.FirstOrDefault(s => s.Name == Solver);
 
-            var result = runResults.FirstOrDefault(s => s.Name == Solver);
 
             if (result == null)
             {
@@ -42,21 +41,37 @@ namespace EulerDisplay.Controllers
 
         public ActionResult Solution(string id)
         {
-            var runResults = Results.All;
+            var runResults = Results.All;   
 
             ViewBag.Title = "Student Leaderboard";
 
             ViewBag.Title = "Student Leaderboard";
 
-            var result = runResults.Select(s => { s.ProblemResults = s.ProblemResults.Where(p => p.Value.ProblemID.ToString() == id).ToDictionary(p => p.Key, p => p.Value); return s; }).Where(s=>s.TotalSolved!=0).OrderBy(s=>s.TotalElapsed).ToList();
+            var filteredResults = new List<RunResults>();
 
-            ViewBag.Problem = "Problem " + id;
 
-            if (result == null)
+            //should be done some other way...
+            foreach (var result in runResults)
+            {
+                foreach (var problem in result.ProblemResults)
+                {
+                    if (problem.Value.ProblemID.ToString() == id)
+                    {
+                        filteredResults.Add(result);
+                        break;
+                    }
+                }
+            }
+
+            filteredResults = filteredResults.Where(s => s.TotalSolved != 0).OrderBy(s => s.TotalElapsed).ToList();
+           
+                ViewBag.Problem = "Problem " + id;
+
+            if (filteredResults == null)
             {
                 Redirect("~/Error");
             }
-            return View(result);
+            return View(filteredResults);
         }
 
         public ActionResult Reset()

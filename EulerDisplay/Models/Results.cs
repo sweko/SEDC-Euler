@@ -10,15 +10,15 @@ namespace EulerEngine
 {
     public abstract class Results
     {
-        
+
         public static List<RunResults> All { get { return Run(); } }
         private static List<RunResults> Cached;
         private static int TotalSolved = 0;
 
-        public static List<RunResults> Run()
+            public static List<RunResults> Run()
         {
-            
-            
+
+
             Executor executor = new Executor();
             var solvers = Assembly
                 .GetAssembly(typeof(SWekoSolver))
@@ -27,7 +27,7 @@ namespace EulerEngine
                 .Select(Activator.CreateInstance)
                 .Cast<ISolver>();
 
-          
+
 
             Console.WriteLine("change");
 
@@ -54,7 +54,7 @@ namespace EulerEngine
             executor.RegisterSolver(new BaseSolver { Name = "Darko Hristovski" });
             executor.RegisterSolver(new BaseSolver { Name = "Daniel Bibovski" });
 
-            if (executor.NumberOfSolutions == TotalSolved) 
+            if (executor.NumberOfSolutions == TotalSolved)
             {
                 return Cached;
             }
