@@ -1,26 +1,25 @@
-﻿@model System.Collections.Generic.List<EulerEngine.RunResults>
+﻿@model IEnumerable<EulerDisplay.Models.ProblemViewModel>
 
-    @{
-        ViewBag.Title = "Solution";
-    }
+@{
+    ViewBag.Title = "Solution";
+}
 
-
-
-    <table class="table" style="max-width:500px; margin:auto;">
-        <thead>
+<table class="table" style="max-width:500px; margin:auto;">
+    <thead>
+        <tr>
+            <th rowspan="2">
+                <h2>@ViewBag.Problem</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var solution in Model)
+        {
             <tr>
-                <th rowspan="2">
-                    <h2>@ViewBag.Problem</h2>
-                </th>
+                <td>@solution.Solver</td>
+                <td>@solution.TotalElapsed.TotalMilliseconds ms</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var solution in Model)
-            {
-                <tr>
-                    <td>@solution.Name</td>
-                    <td>@solution.ProblemResults.First().Value.RunLength.TotalMilliseconds ms</td>
-                </tr>
-            }
-        </tbody>    
-    </table>
+        }
+    </tbody>
+</table>
+

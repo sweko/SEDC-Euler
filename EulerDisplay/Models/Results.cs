@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using EulerEngine;
 using EulerSolutions.SWeko;
 
-namespace EulerEngine
+namespace EulerDisplay.Models
 {
-    public abstract class Results
+    public static class Results
     {
 
         public static List<RunResults> All { get { return Run(); } }
-        private static List<RunResults> Cached;
-        private static int TotalSolved = 0;
+        private static List<RunResults> cached;
+        private static int TotalSolved;
 
-            public static List<RunResults> Run()
+        public static List<RunResults> Run()
         {
-
-
             Executor executor = new Executor();
             var solvers = Assembly
                 .GetAssembly(typeof(SWekoSolver))
@@ -26,10 +23,6 @@ namespace EulerEngine
                 .Where(t => t.GetInterfaces().Contains(typeof(ISolver)))
                 .Select(Activator.CreateInstance)
                 .Cast<ISolver>();
-
-
-
-            Console.WriteLine("change");
 
             foreach (var solver in solvers)
             {
@@ -56,11 +49,11 @@ namespace EulerEngine
 
             if (executor.NumberOfSolutions == TotalSolved)
             {
-                return Cached;
+                return cached;
             }
 
             var runResults = executor.RunSolvers().OrderByDescending(rr => rr.TotalSolved).ThenBy(rr => rr.Name).ToList();
-            Cached = runResults;
+            cached = runResults;
             TotalSolved = executor.NumberOfSolutions;
             return runResults;
         }

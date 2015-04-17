@@ -16,7 +16,7 @@ namespace EulerEngine
         {
             get
             {
-                return solvers.Where(x => x.GetSolutions().Count() > 0).Sum(x=>x.GetSolutions().Count());
+                return solvers.Where(x => x.GetSolutions().Any()).Sum(x=>x.GetSolutions().Count());
             }
         }
 

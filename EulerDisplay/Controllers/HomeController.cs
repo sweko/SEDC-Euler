@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
-using EulerEngine;
-using EulerSolutions.SWeko;
+using EulerDisplay.Models;
 
 namespace EulerDisplay.Controllers
 {
@@ -22,10 +18,6 @@ namespace EulerDisplay.Controllers
 
         public ActionResult Personal(string Solver)
         {
-            
-
-            ViewBag.Title = "Student Leaderboard";
-
             ViewBag.Title = "Student Leaderboard";
 
             var result = Results.All.FirstOrDefault(s => s.Name == Solver);
@@ -41,36 +33,18 @@ namespace EulerDisplay.Controllers
 
         public ActionResult Solution(string id)
         {
-            var runResults = Results.All;   
-
+            var runResults = Results.All;
             ViewBag.Title = "Student Leaderboard";
 
-            ViewBag.Title = "Student Leaderboard";
+            var problemId = int.Parse(id);
 
-            var filteredResults = new List<RunResults>();
-
-
-            //should be done some other way...
-            foreach (var result in runResults)
+            var filteredResults = runResults.SelectMany(rr => rr.ProblemResults.Select(pr => new ProblemViewModel
             {
-                foreach (var problem in result.ProblemResults)
-                {
-                    if (problem.Value.ProblemID.ToString() == id)
-                    {
-                        filteredResults.Add(result);
-                        break;
-                    }
-                }
-            }
+                ProblemID = pr.Key,
+                TotalElapsed = pr.Value.RunLength,
+                Solver = rr.Name
+            })).Where(pr => pr.ProblemID == problemId).OrderBy(pr => pr.TotalElapsed);
 
-            filteredResults = filteredResults.Where(s => s.TotalSolved != 0).OrderBy(s => s.TotalElapsed).ToList();
-           
-                ViewBag.Problem = "Problem " + id;
-
-            if (filteredResults == null)
-            {
-                Redirect("~/Error");
-            }
             return View(filteredResults);
         }
 
