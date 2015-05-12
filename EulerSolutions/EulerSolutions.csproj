@@ -68,6 +68,17 @@
     <Compile Include="SWeko\Problem010.cs" />
     <Compile Include="SWeko\Problem012.cs" />
     <Compile Include="SWeko\SWekoSolver.cs" />
+    <Compile Include="VTotocevski\Problem1.cs" />
+    <Compile Include="VTotocevski\Problem10.cs" />
+    <Compile Include="VTotocevski\Problem2.cs" />
+    <Compile Include="VTotocevski\Problem3.cs" />
+    <Compile Include="VTotocevski\Problem4.cs" />
+    <Compile Include="VTotocevski\Problem5.cs" />
+    <Compile Include="VTotocevski\Problem6.cs" />
+    <Compile Include="VTotocevski\Problem7.cs" />
+    <Compile Include="VTotocevski\Problem8.cs" />
+    <Compile Include="VTotocevski\Problem9.cs" />
+    <Compile Include="VTotocevski\VTotocevskiSolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EulerEngine\EulerEngine.csproj">

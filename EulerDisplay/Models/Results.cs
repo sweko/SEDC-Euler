@@ -33,7 +33,6 @@ namespace EulerDisplay.Models
             executor.RegisterSolver(new BaseSolver { Name = "Darko Kostadinov" });
             executor.RegisterSolver(new BaseSolver { Name = "Goran Tozievski" });
             executor.RegisterSolver(new BaseSolver { Name = "Gorast Cvetkovski" });
-            executor.RegisterSolver(new BaseSolver { Name = "Vladimir Totochevski" });
             executor.RegisterSolver(new BaseSolver { Name = "Jovan Cokleski" });
             executor.RegisterSolver(new BaseSolver { Name = "Petar Papalevski" });
             executor.RegisterSolver(new BaseSolver { Name = "Ilche Ivanovski" });
