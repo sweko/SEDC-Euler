@@ -79,6 +79,17 @@
     <Compile Include="VTotocevski\Problem8.cs" />
     <Compile Include="VTotocevski\Problem9.cs" />
     <Compile Include="VTotocevski\VTotocevskiSolver.cs" />
+    <Compile Include="IIlche\Problem01.cs" />
+    <Compile Include="IIlche\Problem02.cs" />
+    <Compile Include="IIlche\Problem03.cs" />
+    <Compile Include="IIlche\Problem04.cs" />
+    <Compile Include="IIlche\Problem05.cs" />
+    <Compile Include="IIlche\Problem06.cs" />
+    <Compile Include="IIlche\Problem07.cs" />
+    <Compile Include="IIlche\Problem08.cs" />
+    <Compile Include="IIlche\Problem09.cs" />
+    <Compile Include="IIlche\Problem10.cs" />
+    <Compile Include="IIlche\IIlcheSolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EulerEngine\EulerEngine.csproj">
